@@ -20,4 +20,10 @@ public class InMemoryDeckDao implements DeckDao {
 		return deck;
 	}
 
+	@Override
+	public Deck getDeckByName(String deckName) {
+		return decks.get(deckName);
+	}
+
+	
 }
