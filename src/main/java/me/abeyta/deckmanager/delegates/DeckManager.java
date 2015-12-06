@@ -36,10 +36,11 @@ public class DeckManager {
 		return dao.getAllExistingDeckNames();
 	}
 	
-	public void shuffle(String deckName) {
+	public Deck shuffle(String deckName) {
 		Deck deck = dao.getDeckByName(deckName);
 		shuffler.shuffle(deck);
 		dao.createOrReplace(deck);
+		return deck;
 	}
 
 }

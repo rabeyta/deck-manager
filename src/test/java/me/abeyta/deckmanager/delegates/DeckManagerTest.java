@@ -77,8 +77,9 @@ public class DeckManagerTest {
 	public void shuffle() {
 		when(dao.getDeckByName(deckName)).thenReturn(deck);
 		
-		manager.shuffle(deckName);
+		Deck output = manager.shuffle(deckName);
 		
 		verify(shuffler).shuffle(deck);
+		assertSame(deck, output);
 	}
 }
