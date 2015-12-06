@@ -24,7 +24,7 @@ public class DeckController {
 	@RequestMapping(value="/{deckName}", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Deck createNewDeck(@PathVariable(value="deckName") String deckName) {
-		return manager.create(deckName);
+		return manager.create(new Deck(deckName));
 	}
 	
 	@RequestMapping(value="/{deckName}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)

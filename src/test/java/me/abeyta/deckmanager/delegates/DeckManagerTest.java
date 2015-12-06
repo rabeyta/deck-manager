@@ -39,9 +39,9 @@ public class DeckManagerTest {
 	
 	@Test
 	public void createReturnsDeckFromDao() {
-		when(dao.createOrReplace(deckName)).thenReturn(deck);
+		when(dao.createOrReplace(deck)).thenReturn(deck);
 		
-		Deck output = manager.create(deckName);
+		Deck output = manager.create(deck);
 		
 		assertSame(deck , output);
 	}
@@ -75,7 +75,9 @@ public class DeckManagerTest {
 	
 	@Test
 	public void shuffle() {
-		manager.shuffle(deck);
+		when(dao.getDeckByName(deckName)).thenReturn(deck);
+		
+		manager.shuffle(deckName);
 		
 		verify(shuffler).shuffle(deck);
 	}

@@ -17,9 +17,8 @@ public class InMemoryDeckDao implements DeckDao {
 	private Map<String, Deck> decks = new HashMap<>();
 	
 	@Override
-	public Deck createOrReplace(String deckName) {
-		Deck deck = new Deck(deckName);
-		decks.put(deckName, deck);
+	public Deck createOrReplace(Deck deck) {
+		decks.put(deck.getName(), deck);
 		return deck;
 	}
 

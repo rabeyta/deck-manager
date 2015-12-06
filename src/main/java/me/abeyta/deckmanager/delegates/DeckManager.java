@@ -20,8 +20,8 @@ public class DeckManager {
 	@Autowired
 	private Shuffler shuffler;
 	
-	public Deck create(String deckName) {
-		return dao.createOrReplace(deckName);
+	public Deck create(Deck deck) {
+		return dao.createOrReplace(deck);
 	}
 
 	public Deck get(String deckName) {
@@ -36,8 +36,10 @@ public class DeckManager {
 		return dao.getAllExistingDeckNames();
 	}
 	
-	public void shuffle(Deck deck) {
+	public void shuffle(String deckName) {
+		Deck deck = dao.getDeckByName(deckName);
 		shuffler.shuffle(deck);
+		dao.createOrReplace(deck);
 	}
 
 }
