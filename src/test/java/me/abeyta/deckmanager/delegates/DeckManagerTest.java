@@ -16,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import me.abeyta.deckmanager.data.DeckDao;
 import me.abeyta.deckmanager.delegates.shuffle.Shuffler;
+import me.abeyta.deckmanager.exceptions.DeckNotFoundException;
 import me.abeyta.deckmanager.model.Deck;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -47,7 +48,7 @@ public class DeckManagerTest {
 	}
 	
 	@Test
-	public void getDeck() {
+	public void getDeck() throws DeckNotFoundException {
 		when(dao.getDeckByName(deckName)).thenReturn(deck);
 		Deck output = manager.get(deckName);
 		
@@ -74,7 +75,7 @@ public class DeckManagerTest {
 	}
 	
 	@Test
-	public void shuffle() {
+	public void shuffle() throws DeckNotFoundException {
 		when(dao.getDeckByName(deckName)).thenReturn(deck);
 		
 		Deck output = manager.shuffle(deckName);
