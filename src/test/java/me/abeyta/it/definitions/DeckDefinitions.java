@@ -1,9 +1,10 @@
 package me.abeyta.it.definitions;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -11,7 +12,9 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.web.client.HttpClientErrorException;
 
 import me.abeyta.deckmanager.model.CardUtils;
 import me.abeyta.deckmanager.model.Deck;
@@ -82,8 +85,12 @@ public class DeckDefinitions {
 
 	@Then("the deck is not able to be retrieved")
 	public void theDeckIsNotAbleToBeRetrieved() {
-		Deck deck = steps.get(state.getDeckName());
-		assertNull(deck);
+		try {
+			steps.get(state.getDeckName());
+			fail("should have thrown exception");
+		} catch (HttpClientErrorException e) {
+			assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
+		}
 	}
 	
 	@Then("the shuffled deck is returned")
