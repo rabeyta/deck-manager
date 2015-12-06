@@ -18,11 +18,23 @@ public class DeckController {
 
 	@Autowired
 	private DeckManager manager;
-	
+
 	@RequestMapping(value="/{deckName}", method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Deck createNewDeck(@PathVariable(value="deckName") String deckName) {
 		return manager.create(deckName);
 	}
 	
+	@RequestMapping(value="/{deckName}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public Deck getDeck(@PathVariable(value="deckName") String deckName) {
+		//TODO: 404 when not found
+		return manager.get(deckName);
+	}
+	
+	@RequestMapping(value="/{deckName}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteDeck(@PathVariable(value="deckName") String deckName) {
+		//TODO: 404 when not found
+		manager.delete(deckName);
+	}
 }
