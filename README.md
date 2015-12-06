@@ -28,15 +28,20 @@ API GUI to play around with operations and visualize methods
 Workstation Setup
 
    1. Install [Eclipse](http://www.eclipse.org/) or [STS](http://spring.io/tools/sts) (Preferred)
-   2. Import the project in STS. 
+   2. Ensure you have [Maven](http://maven.apache.org/) installed and setup on your PATH 
+   3. Import the project in STS. 
 	   3. File -> Import -> Existing Maven Project
-   3. Build the application
+   4. Build the application
 
 Building the application
 
- 1. Right click the project -> Run As -> Maven Build...
- 2. fill in 'clean install' in the goals
- 3. Press Run
+ - Within STS
+      1. Right click the project -> Run As -> Maven Build...
+      2. fill in 'clean install' in the goals
+      3. Press Run
+ - Outside STS
+      1. Navigate to the folder you saved the project into
+      2. Execute the following command `mvn clean install`
    
 Running the application
 
@@ -45,7 +50,7 @@ Running the application
  - Outside STS
       1. Build the application
       2. Navigate to folder containing the jar
-      3. Execute the following command`java -jar deck-manager-1.0.0-SNAPSHOT.jar -Dshuffle.technique=hand`
+      3. Execute the following command `java -jar deck-manager-1.0.0-SNAPSHOT.jar --shuffle.technique=hand`
 
 Executing Integration Tests
 
