@@ -1,4 +1,4 @@
-package me.abeyta.deckmanager.config;
+package me.abeyta.deckmanager;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;

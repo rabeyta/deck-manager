@@ -26,7 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.google.gson.Gson;
 
-import me.abeyta.deckmanager.config.ControllerTestConfig;
+import me.abeyta.deckmanager.ControllerTestConfig;
 import me.abeyta.deckmanager.delegates.DeckManager;
 import me.abeyta.deckmanager.model.Deck;
 
