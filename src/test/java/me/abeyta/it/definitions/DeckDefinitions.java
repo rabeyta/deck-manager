@@ -2,6 +2,7 @@ package me.abeyta.it.definitions;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -72,6 +73,17 @@ public class DeckDefinitions {
 	@When("I request the deck")
 	public void requestADeck() {
 		state.setDeck(steps.get(state.getDeckName()));
+	}
+
+	@When("I request the deck to be deleted")
+	public void requestTheDeckToBeDeleted() {
+		steps.deleteDeck(state.getDeckName());
+	}
+
+	@Then("the deck is not able to be retrieved")
+	public void theDeckIsNotAbleToBeRetrieved() {
+		Deck deck = steps.get(state.getDeckName());
+		assertNull(deck);
 	}
 	
 	@Then("the shuffled deck is returned")
