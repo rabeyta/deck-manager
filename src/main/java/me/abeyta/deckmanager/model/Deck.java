@@ -13,6 +13,8 @@ public class Deck {
 	private String name;
 	private Set<Card> cards;
 	
+	public Deck() {}
+	
 	public Deck(String deckName) {
 		this.name = deckName;
 		this.cards = new LinkedHashSet<>();
