@@ -16,7 +16,7 @@ Running the application
    Outside STS
       1. Build the application
       2. Navigate to folder containing the jar
-      3. Execute the following command - java -jar deck-manager-1.0.0-SNAPSHOT.jar -Dshuffle.technique=hand
+      3. Execute the following command - "java -jar deck-manager-1.0.0-SNAPSHOT.jar -Dshuffle.technique=hand"
 
 Executing Integration Tests
    In STS
@@ -25,7 +25,6 @@ Executing Integration Tests
    Outside STS - Maven (Jenkins or Local Validation)
       1. mvn verify -Pcheckout
       2. Open the following file to view the report -> ./target/site/serenity/index.html
- 
  
  FAQ
  How do I change the port being used?
