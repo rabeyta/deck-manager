@@ -1,6 +1,9 @@
 package me.abeyta.it.definitions;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -38,6 +41,17 @@ public class DeckDefinitions {
 		assertDeckIsNotInOriginalOrder(deck);
 		state.setDeck(deck);
 	}
+
+	@Given("an existing deck named $deckName")
+	public void anExistingDeckNamed(String deckName) {
+		state.setDeckName(deckName);
+		steps.createNewDeck(deckName);
+	}
+
+	@When("I request a list of all known decks")
+	public void iRequestAListOfAllKnownDecks() {
+		state.setDeckList(steps.getDecks());
+	}
 	
 	private void assertDeckIsNotInOriginalOrder(Deck deck) {
 		// TODO Auto-generated method stub
@@ -58,6 +72,19 @@ public class DeckDefinitions {
 		assertDeckOriginalOrder(deck);
 	}
 
+	@Then("I receive list of all known decks")
+	public void iReceiveAListOfKnownDecks() {
+		List<String> deckList = state.getDeckList();
+		
+		assertNotNull(deckList);
+		assertTrue(deckList.size() > 0);
+	}
+	
+	@Then("the list contains $deckName")
+	public void theListContainsDeckName(String deckName) {
+		assertTrue(state.getDeckList().contains(deckName));
+	}
+	
 	private void assertDeckOriginalOrder(Deck deck) {
 		//TODO: build asserts
 	}

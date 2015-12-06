@@ -1,6 +1,7 @@
 package me.abeyta.it.steps;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -16,7 +17,7 @@ public class DeckSteps {
 	@Autowired
 	private RestTemplate rest;
 	@Resource(name="decksBaseUrl")
-	private URI server;
+	private URI decksUri;
 	
 	public void createNewDeck(String deckName) {
 		rest.put(createDeckResourceUrl(deckName), null, new Object[] {});
@@ -31,11 +32,16 @@ public class DeckSteps {
 	}
 
 	private String createDeckResourceUrl(String deckName) {
-		return server.toString() + "/" + deckName;
+		return decksUri.toString() + "/" + deckName;
 	}
 
 	public Deck shuffle(String deckName) {
 		return rest.postForObject(createDeckResourceUrl(deckName), deckName, Deck.class);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<String> getDecks() {
+		return rest.getForObject(decksUri.toString(), List.class);
 	}
 
 }
