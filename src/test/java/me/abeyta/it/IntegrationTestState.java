@@ -1,5 +1,7 @@
 package me.abeyta.it;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import me.abeyta.deckmanager.model.Deck;
@@ -40,5 +42,12 @@ public class IntegrationTestState {
 	public void setDeck(Deck deck) {
 		putInSession("deck", deck);
 	}
-	
+
+	public void setDeckList(List<String> decks) {
+		putInSession("deckList", decks);
+	}
+
+	public List<String> getDeckList(){
+		return getFromSession("deckList");
+	}
 }
