@@ -1,9 +1,8 @@
 package me.abeyta.deckmanager.data.services;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
+
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,5 +56,17 @@ public class InMemoryDeckDaoTest {
 		assertNull(dao.getDeckByName(deckName));
 		
 		dao.delete(deckName);
+	}
+	
+	@Test
+	public void getAllExistingNames() {
+		dao.createOrReplace("deck1");
+		dao.createOrReplace("deck2");
+		
+		Set<String> names = dao.getAllExistingDeckNames();
+		
+		assertEquals(2, names.size());
+		assertTrue(names.contains("deck1"));
+		assertTrue(names.contains("deck2"));
 	}
 }
