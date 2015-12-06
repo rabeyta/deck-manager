@@ -5,12 +5,14 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import me.abeyta.deckmanager.model.Card;
 import me.abeyta.deckmanager.model.Deck;
 
 @Component
+@Primary
 public class SimpleShuffler implements Shuffler {
 
 	@Override
