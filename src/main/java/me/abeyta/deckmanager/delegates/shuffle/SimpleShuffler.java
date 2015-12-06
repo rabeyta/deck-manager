@@ -1,9 +1,8 @@
 package me.abeyta.deckmanager.delegates.shuffle;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import static me.abeyta.deckmanager.delegates.shuffle.ShufflerUtils.convertCardArrayIntoSet;
+import static me.abeyta.deckmanager.delegates.shuffle.ShufflerUtils.convertDeckIntoCardArray;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 import me.abeyta.deckmanager.model.Card;
 import me.abeyta.deckmanager.model.Deck;
 
-@Component
+@Component()
 @Primary
 public class SimpleShuffler implements Shuffler {
 
@@ -27,17 +26,6 @@ public class SimpleShuffler implements Shuffler {
 		shuffleCards(cards);
 		
 		deck.setCards(convertCardArrayIntoSet(cards));
-	}
-
-	private Set<Card> convertCardArrayIntoSet(Card[] cards) {
-		Set<Card> shuffledCardSet = new LinkedHashSet<>();
-		CollectionUtils.addAll(shuffledCardSet, cards);
-		return shuffledCardSet;
-	}
-
-	private Card[] convertDeckIntoCardArray(Deck deck) {
-		Set<Card> cardSet = deck.getCards();
-		return cardSet.toArray(new Card[cardSet.size()]);
 	}
 
 	private void shuffleCards(Card[] cards) {
