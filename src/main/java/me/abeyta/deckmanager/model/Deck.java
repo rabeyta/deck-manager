@@ -13,11 +13,33 @@ public class Deck {
 	private String name;
 	private Set<Card> cards;
 	
-	public Deck() {}
+	public Deck() {
+		this("default");
+	}
 	
 	public Deck(String deckName) {
 		this.name = deckName;
 		this.cards = new LinkedHashSet<>();
+		populateSuite(Suite.HEARTS);
+		populateSuite(Suite.DIAMONDS);
+		populateSuite(Suite.CLUBS);
+		populateSuite(Suite.SPADES);
+	}
+	
+	private void populateSuite(Suite suite) {
+		cards.add(new Card(suite, "A"));
+		cards.add(new Card(suite, "2"));
+		cards.add(new Card(suite, "3"));
+		cards.add(new Card(suite, "4"));
+		cards.add(new Card(suite, "5"));
+		cards.add(new Card(suite, "6"));
+		cards.add(new Card(suite, "7"));
+		cards.add(new Card(suite, "8"));
+		cards.add(new Card(suite, "9"));
+		cards.add(new Card(suite, "10"));
+		cards.add(new Card(suite, "J"));
+		cards.add(new Card(suite, "Q"));
+		cards.add(new Card(suite, "K"));
 	}
 
 	public String getName() {

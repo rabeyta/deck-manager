@@ -10,6 +10,13 @@ public class Card {
 	private Suite suite;
 	private String faceValue;
 	
+	public Card() {}
+	
+	public Card(Suite suite, String faceValue) {	
+		this.suite = suite;
+		this.faceValue = faceValue;
+	}
+	
 	public Suite getSuite() {
 		return suite;
 	}
