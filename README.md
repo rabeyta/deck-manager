@@ -5,7 +5,7 @@ The service enables you to perform the following actions on a given deck:
  - create
  - delete
  - shuffle
- - retrieve all deck names
+ - retrieve all deck names the manager knows of
 
 There are two options for shuffling techniques.
 
