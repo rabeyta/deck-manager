@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import me.abeyta.deckmanager.data.DeckDao;
 import me.abeyta.deckmanager.delegates.DeckManager;
+import me.abeyta.deckmanager.delegates.shuffle.Shuffler;
 
 @Configuration
 @ComponentScan(basePackages="me.abeyta.deckmanager.controllers")
@@ -22,5 +23,10 @@ public class ControllerTestConfig {
 	@Bean
 	public DeckDao mockDeckDao() {
 		return Mockito.mock(DeckDao.class);
+	}
+	
+	@Bean
+	public Shuffler mockShuffler() {
+		return Mockito.mock(Shuffler.class);
 	}
 }

@@ -1,6 +1,7 @@
 package me.abeyta.deckmanager.controllers;
 
 import static org.junit.Assert.assertSame;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import me.abeyta.deckmanager.delegates.DeckManager;
+import me.abeyta.deckmanager.model.Deck;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeckControllerTest {
@@ -30,7 +32,7 @@ public class DeckControllerTest {
 	public void createNewDeck() {
 		controller.createNewDeck(deckName);
 		
-		verify(manager).create(deckName);
+		verify(manager).create(isA(Deck.class));
 	}
 	
 	@Test

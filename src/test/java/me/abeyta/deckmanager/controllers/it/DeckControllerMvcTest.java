@@ -1,5 +1,6 @@
 package me.abeyta.deckmanager.controllers.it;
 
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -51,13 +52,13 @@ public class DeckControllerMvcTest {
 	
 	@Test
 	public void putToDecksCallsManagerToCreateWithGivenName() throws Exception {
-		when(mockManager.create(deckName)).thenReturn(deck);
+		when(mockManager.create(isA(Deck.class))).thenReturn(deck);
 		
 		mockMvc.perform(put("/decks/" + deckName,new Object[] {}))
 											.andExpect(status().isCreated())
 											.andExpect(content().json(getDeckJson(), false));
 		
-		verify(mockManager).create(deckName);
+		verify(mockManager).create(isA(Deck.class));
 	}
 
 	@Test

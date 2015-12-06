@@ -18,31 +18,34 @@ public class InMemoryDeckDaoTest {
 	@InjectMocks
 	private InMemoryDeckDao dao;
 	private String deckName;
+	private Deck deck;
 	
 	@Before
 	public void setup() {
 		deckName = "deck1";
+		deck = new Deck(deckName);
 	}
 	
 	@Test
 	public void createOrReplaceNotThereBeforeAddsDeck() {
-		Deck deck1 = dao.createOrReplace(deckName);
+		Deck deck1 = dao.createOrReplace(deck);
+		assertSame(deck, deck1);
 		
 		assertSame(deck1, dao.getDeckByName(deckName));
 	}
 	
 	@Test
 	public void createOrReplaceIsAlreadyThereReplacesDeck() {
-		Deck initialReturnedDeck = dao.createOrReplace(deckName);
+		Deck initialReturnedDeck = dao.createOrReplace(deck);
 		assertSame(initialReturnedDeck, dao.getDeckByName(deckName));
 		
-		Deck newDeck1 = dao.createOrReplace(deckName);
+		Deck newDeck1 = dao.createOrReplace(new Deck(deckName));
 		assertNotSame(initialReturnedDeck, newDeck1);
 	}
 	
 	@Test
 	public void deleteDeckExistingRemoves() {
-		dao.createOrReplace(deckName);
+		dao.createOrReplace(deck);
 		
 		Deck deck = dao.getDeckByName(deckName);
 		assertNotNull(deck);
@@ -60,8 +63,8 @@ public class InMemoryDeckDaoTest {
 	
 	@Test
 	public void getAllExistingNames() {
-		dao.createOrReplace("deck1");
-		dao.createOrReplace("deck2");
+		dao.createOrReplace(new Deck("deck1"));
+		dao.createOrReplace(new Deck("deck2"));
 		
 		Set<String> names = dao.getAllExistingDeckNames();
 		
