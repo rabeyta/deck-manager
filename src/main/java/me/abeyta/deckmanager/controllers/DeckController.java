@@ -41,7 +41,7 @@ public class DeckController {
 	
 	@RequestMapping(value="/{deckName}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteDeck(@PathVariable(value="deckName") String deckName) throws DeckNotFoundException {
+	public void deleteDeck(@PathVariable(value="deckName") String deckName) {
 		manager.delete(deckName);
 	}
 	

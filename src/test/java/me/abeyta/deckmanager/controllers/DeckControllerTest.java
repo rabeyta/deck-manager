@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import me.abeyta.deckmanager.delegates.DeckManager;
+import me.abeyta.deckmanager.exceptions.DeckNotFoundException;
 import me.abeyta.deckmanager.model.Deck;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,7 +37,7 @@ public class DeckControllerTest {
 	}
 	
 	@Test
-	public void getDeck() {
+	public void getDeck() throws DeckNotFoundException {
 		controller.getDeck(deckName);
 		
 		verify(manager).get(deckName);
@@ -61,7 +62,7 @@ public class DeckControllerTest {
 	}
 	
 	@Test
-	public void shuffle() {
+	public void shuffle() throws DeckNotFoundException {
 		Deck deck = new Deck();
 		when(manager.shuffle(deckName)).thenReturn(deck);
 		

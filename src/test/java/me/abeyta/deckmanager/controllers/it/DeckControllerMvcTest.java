@@ -1,7 +1,6 @@
 package me.abeyta.deckmanager.controllers.it;
 
 import static org.mockito.Matchers.isA;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -92,16 +91,6 @@ public class DeckControllerMvcTest {
 	public void deleteDeck() throws Exception {
 		mockMvc.perform(delete(deckNameUrl(),new Object[] {}))
 								.andExpect(status().isNoContent());
-				
-		verify(mockManager).delete(deckName);
-	}
-	
-	@Test
-	public void deleteDeckNotFound() throws Exception {
-		doThrow(new DeckNotFoundException()).when(mockManager).delete(deckName);
-		
-		mockMvc.perform(delete(deckNameUrl(),new Object[] {}))
-								.andExpect(status().isNotFound());
 				
 		verify(mockManager).delete(deckName);
 	}

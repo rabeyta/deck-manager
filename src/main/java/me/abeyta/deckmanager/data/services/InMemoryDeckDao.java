@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import me.abeyta.deckmanager.data.DeckDao;
+import me.abeyta.deckmanager.exceptions.DeckNotFoundException;
 import me.abeyta.deckmanager.model.Deck;
 
 @Component
@@ -27,8 +28,14 @@ public class InMemoryDeckDao implements DeckDao {
 	}
 
 	@Override
-	public Deck getDeckByName(String deckName) {
-		return decks.get(deckName);
+	public Deck getDeckByName(String deckName) throws DeckNotFoundException {
+		Deck deck = decks.get(deckName);
+		
+		if(deck == null) {
+			throw new DeckNotFoundException();
+		}
+		
+		return deck;
 	}
 
 	@Override

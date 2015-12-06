@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import me.abeyta.deckmanager.data.DeckDao;
 import me.abeyta.deckmanager.delegates.shuffle.Shuffler;
+import me.abeyta.deckmanager.exceptions.DeckNotFoundException;
 import me.abeyta.deckmanager.model.Deck;
 
 @Component
@@ -24,7 +25,7 @@ public class DeckManager {
 		return dao.createOrReplace(deck);
 	}
 
-	public Deck get(String deckName) {
+	public Deck get(String deckName) throws DeckNotFoundException {
 		return dao.getDeckByName(deckName);
 	}
 
@@ -36,7 +37,7 @@ public class DeckManager {
 		return dao.getAllExistingDeckNames();
 	}
 	
-	public Deck shuffle(String deckName) {
+	public Deck shuffle(String deckName) throws DeckNotFoundException {
 		Deck deck = dao.getDeckByName(deckName);
 		shuffler.shuffle(deck);
 		dao.createOrReplace(deck);
