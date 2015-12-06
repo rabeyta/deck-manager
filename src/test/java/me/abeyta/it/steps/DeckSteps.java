@@ -6,8 +6,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.Gson;
 
 import me.abeyta.deckmanager.model.Deck;
 
@@ -20,7 +23,7 @@ public class DeckSteps {
 	private URI decksUri;
 	
 	public void createNewDeck(String deckName) {
-		rest.put(createDeckResourceUrl(deckName), null, new Object[] {});
+		rest.put(createDeckResourceUrl(deckName), deckName, new Object[] {});
 	}
 	
 	public void deleteDeck(String deckName) {
@@ -28,7 +31,8 @@ public class DeckSteps {
 	}
 	
 	public Deck get(String deckName) {
-		return rest.getForObject(createDeckResourceUrl(deckName), Deck.class);
+		ResponseEntity<String> response = rest.getForEntity(createDeckResourceUrl(deckName), String.class, new Object[] {});
+		return new Gson().fromJson(response.getBody(), Deck.class);
 	}
 
 	private String createDeckResourceUrl(String deckName) {
@@ -36,7 +40,8 @@ public class DeckSteps {
 	}
 
 	public Deck shuffle(String deckName) {
-		return rest.postForObject(createDeckResourceUrl(deckName), deckName, Deck.class);
+		ResponseEntity<String> response = rest.postForEntity(createDeckResourceUrl(deckName), deckName, String.class, new Object[] {});
+		return new Gson().fromJson(response.getBody(), Deck.class);
 	}
 
 	@SuppressWarnings("unchecked")
