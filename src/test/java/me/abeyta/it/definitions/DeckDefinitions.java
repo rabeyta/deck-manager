@@ -75,7 +75,12 @@ public class DeckDefinitions {
 	
 	@When("I request the deck")
 	public void requestADeck() {
-		state.setDeck(steps.get(state.getDeckName()));
+		try {
+			state.setDeck(steps.get(state.getDeckName()));	
+		} catch (HttpClientErrorException e) {
+			state.setHttpClientErrorException(e);
+		}
+		
 	}
 
 	@When("I request the deck to be deleted")
@@ -123,6 +128,11 @@ public class DeckDefinitions {
 	@Then("the list contains $deckName")
 	public void theListContainsDeckName(String deckName) {
 		assertTrue(state.getDeckList().contains(deckName));
+	}
+	
+	@Then("I receive an error status code of $statusCode")
+	public void iReceivedStatusCodeOf(HttpStatus statusCode) {
+		assertEquals(statusCode, state.getHttpClientErrorException().getStatusCode());
 	}
 	
 }

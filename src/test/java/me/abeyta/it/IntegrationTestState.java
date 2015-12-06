@@ -3,6 +3,7 @@ package me.abeyta.it;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 
 import me.abeyta.deckmanager.model.Deck;
 import net.serenitybdd.core.Serenity;
@@ -57,5 +58,13 @@ public class IntegrationTestState {
 
 	public List<String> getDeckList(){
 		return getFromSession("deckList");
+	}
+	
+	public void setHttpClientErrorException(HttpClientErrorException exception) {
+		putInSession("clientException", exception);
+	}
+	
+	public HttpClientErrorException getHttpClientErrorException() {
+		return getFromSession("clientException");
 	}
 }
