@@ -40,7 +40,7 @@ public class DeckDefinitions {
 	@Given("the deck is shuffled")
 	public void theDeckIsShuffled() {
 		Deck deck = steps.shuffle(state.getDeckName());
-		state.setDeck(deck);
+		state.setShuffledDeck(deck);
 		assertFalse(CardUtils.isDeckInDefaultOrder(deck));
 	}
 
@@ -69,10 +69,20 @@ public class DeckDefinitions {
 		state.setDeck(steps.get(deckName));
 	}
 	
+	@When("I request the deck")
+	public void requestADeck() {
+		state.setDeck(steps.get(state.getDeckName()));
+	}
+	
+	@Then("the shuffled deck is returned")
+	public void shuffledDeckIsReturned() {
+		System.out.println(state.getDeck());
+		System.out.println(state.getShuffledDeck());
+		assertTrue("Decks were not equal", state.getDeck().equals(state.getShuffledDeck()));
+	}
+	
 	@Then("the deck is in a different order")
 	public void theDeckIsInAdifferentOrder() {
-		Deck deck1 = state.getDeck();
-		Deck deck2 = state.getShuffledDeck();
 		assertFalse(state.getDeck().equals(state.getShuffledDeck()));
 	}
 	
