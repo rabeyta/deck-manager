@@ -55,6 +55,23 @@ public class DeckTest {
 	}
 	
 	@Test
+	public void sameCardOrderEquals() {
+		Deck deck1 = new Deck();
+		Deck deck2 = new Deck();
+		
+		assertTrue(deck1.equals(deck2));
+	}
+	
+	@Test
+	public void differentCardCountNotEqual() {
+		Deck deck1 = new Deck();
+		Deck deck2 = new Deck();
+		deck2.getCards().add(new Card());
+		
+		assertFalse(deck1.equals(deck2));
+	}
+	
+	@Test
 	public void nullNotEqual() {
 		Deck deck1 = new Deck();
 		assertFalse(deck1.equals(null));
@@ -69,6 +86,6 @@ public class DeckTest {
 	@Test
 	public void sameObjectEqual() {
 		Deck deck1 = new Deck();
-		assertFalse(deck1.equals(deck1));
+		assertTrue(deck1.equals(deck1));
 	}
 }

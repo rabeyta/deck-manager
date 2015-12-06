@@ -3,7 +3,7 @@ package me.abeyta.deckmanager.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -75,7 +75,21 @@ public class Deck {
 			return false;
 		}
 		Deck rhs = (Deck) obj;
-		return new EqualsBuilder().appendSuper(super.equals(obj)).append(name, rhs.getName()).append(cards, rhs.getCards()).isEquals();
+		return StringUtils.equals(name, rhs.getName()) && cardsInSameOrder(cards, rhs.getCards());
+	}
+
+	private boolean cardsInSameOrder(Set<Card> lhs, Set<Card> rhs) {
+		if(lhs.size() != rhs.size()) {
+			return false;
+		}
+		Card[] leftCards = lhs.toArray(new Card[lhs.size()]);
+		Card[] rightCards = rhs.toArray(new Card[rhs.size()]);
+		for(int x = 0; x < lhs.size(); x ++) {
+			if(!leftCards[x].equals(rightCards[x])) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
