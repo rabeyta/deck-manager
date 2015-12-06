@@ -48,6 +48,12 @@ public class DeckDefinitions {
 	public void anExistingDeckNamed(String deckName) {
 		state.setDeckName(deckName);
 		steps.createNewDeck(deckName);
+		state.setDeck(steps.get(deckName));
+	}
+	
+	@When("I request a deck to be shuffled")
+	public void iREquestADeckToBeShuffled() {
+		state.setShuffledDeck(steps.shuffle(state.getDeckName()));
 	}
 
 	@When("I request a list of all known decks")
@@ -61,6 +67,13 @@ public class DeckDefinitions {
 		
 		steps.createNewDeck(deckName);
 		state.setDeck(steps.get(deckName));
+	}
+	
+	@Then("the deck is in a different order")
+	public void theDeckIsInAdifferentOrder() {
+		Deck deck1 = state.getDeck();
+		Deck deck2 = state.getShuffledDeck();
+		assertFalse(state.getDeck().equals(state.getShuffledDeck()));
 	}
 	
 	@Then("I receive a new unshuffled deck")
