@@ -1,6 +1,7 @@
 package me.abeyta.deckmanager.controllers.it;
 
 import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -18,6 +19,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,11 +31,13 @@ import com.google.gson.Gson;
 
 import me.abeyta.deckmanager.ControllerTestConfig;
 import me.abeyta.deckmanager.delegates.DeckManager;
+import me.abeyta.deckmanager.exceptions.DeckNotFoundException;
 import me.abeyta.deckmanager.model.Deck;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= {ControllerTestConfig.class})
 @WebIntegrationTest
+@DirtiesContext(classMode=ClassMode.AFTER_EACH_TEST_METHOD)
 public class DeckControllerMvcTest {
 
 	@Autowired
@@ -74,9 +79,29 @@ public class DeckControllerMvcTest {
 	}
 	
 	@Test
+	public void getDeckNotFound() throws Exception {
+		when(mockManager.get(deckName)).thenThrow(new DeckNotFoundException());
+		
+		mockMvc.perform(get(deckNameUrl(),new Object[] {}))
+								.andExpect(status().isNotFound());
+		
+		verify(mockManager).get(deckName);
+	}
+	
+	@Test
 	public void deleteDeck() throws Exception {
 		mockMvc.perform(delete(deckNameUrl(),new Object[] {}))
 								.andExpect(status().isNoContent());
+				
+		verify(mockManager).delete(deckName);
+	}
+	
+	@Test
+	public void deleteDeckNotFound() throws Exception {
+		doThrow(new DeckNotFoundException()).when(mockManager).delete(deckName);
+		
+		mockMvc.perform(delete(deckNameUrl(),new Object[] {}))
+								.andExpect(status().isNotFound());
 				
 		verify(mockManager).delete(deckName);
 	}
@@ -105,6 +130,15 @@ public class DeckControllerMvcTest {
 		verify(mockManager).shuffle(deckName);
 	}
 	
+	@Test
+	public void shuffleDeckDeckNotFound() throws Exception {
+		when(mockManager.shuffle(deckName)).thenThrow(new DeckNotFoundException());
+			
+		mockMvc.perform(post(deckNameUrl(),new Object[] {}))
+											.andExpect(status().isNotFound());
+			
+		verify(mockManager).shuffle(deckName);
+	}
 	
 	private String getDeckJson() {
 		return new Gson().toJson(deck);
