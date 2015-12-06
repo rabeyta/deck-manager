@@ -42,6 +42,14 @@ public class IntegrationTestState {
 	public void setDeck(Deck deck) {
 		putInSession("deck", deck);
 	}
+	
+	public Deck getShuffledDeck() {
+		return getFromSession("shuffledDeck");
+	}
+	
+	public void setShuffledDeck(Deck deck) {
+		putInSession("shuffledDeck", deck);
+	}
 
 	public void setDeckList(List<String> decks) {
 		putInSession("deckList", decks);
