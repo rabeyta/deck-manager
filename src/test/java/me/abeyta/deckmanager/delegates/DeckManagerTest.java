@@ -4,9 +4,8 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Set;
-
 import java.util.Collections;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import me.abeyta.deckmanager.data.DeckDao;
+import me.abeyta.deckmanager.delegates.shuffle.Shuffler;
 import me.abeyta.deckmanager.model.Deck;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,6 +25,8 @@ public class DeckManagerTest {
 	private DeckManager manager;
 	@Mock
 	private DeckDao dao;
+	@Mock
+	private Shuffler shuffler;
 	
 	private Deck deck;
 	private String deckName;
@@ -69,5 +71,12 @@ public class DeckManagerTest {
 		
 		assertSame(names, output);
 		verify(dao).getAllExistingDeckNames();
+	}
+	
+	@Test
+	public void shuffle() {
+		manager.shuffle(deck);
+		
+		verify(shuffler).shuffle(deck);
 	}
 }
