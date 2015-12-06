@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomUtils;
-import org.springframework.stereotype.Component;
 
 import me.abeyta.deckmanager.model.Card;
 import me.abeyta.deckmanager.model.Deck;
 
-@Component()
 public class HandShuffler implements Shuffler {
 
 	@Override
