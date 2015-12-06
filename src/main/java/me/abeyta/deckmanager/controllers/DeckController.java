@@ -1,5 +1,7 @@
 package me.abeyta.deckmanager.controllers;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +31,11 @@ public class DeckController {
 	public Deck getDeck(@PathVariable(value="deckName") String deckName) {
 		//TODO: 404 when not found
 		return manager.get(deckName);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public Set<String> getDeckList() {
+		return manager.getAllDeckNames();
 	}
 	
 	@RequestMapping(value="/{deckName}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)

@@ -1,6 +1,11 @@
 package me.abeyta.deckmanager.controllers;
 
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Collections;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +45,17 @@ public class DeckControllerTest {
 		controller.deleteDeck(deckName);
 		
 		verify(manager).delete(deckName);
+	}
+	
+	@Test
+	public void getAllDeckNames() {
+		Set<String> expected = Collections.singleton("deckName");
+		when(manager.getAllDeckNames()).thenReturn(expected);
+		
+		Set<String> deckList = controller.getDeckList();
+		
+		assertSame(expected, deckList);
+		verify(manager).getAllDeckNames();
 	}
 	
 }

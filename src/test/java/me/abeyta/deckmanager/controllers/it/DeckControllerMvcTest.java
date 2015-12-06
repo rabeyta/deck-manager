@@ -8,6 +8,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,6 +77,19 @@ public class DeckControllerMvcTest {
 								.andExpect(status().isNoContent());
 				
 		verify(mockManager).delete(deckName);
+	}
+	
+	@Test
+	public void getDeckList() throws Exception {
+		Set<String> deckNames = Collections.singleton(deckName);
+		
+		when(mockManager.getAllDeckNames()).thenReturn(deckNames);
+		
+		mockMvc.perform(get("/decks/",new Object[] {}))
+								.andExpect(status().isOk())
+								.andExpect(content().json(new Gson().toJson(deckNames), false));
+		
+		verify(mockManager).getAllDeckNames();
 	}
 	
 	private String getDeckJson() {
