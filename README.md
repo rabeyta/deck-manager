@@ -14,7 +14,7 @@ Workstation Setup
 
 Building the application
    1. execute the following command to use maven to build the jar - mvn clean install
-
+   
 Running the application
    Within STS
       1. Right click on the deck-manager project -> Run As -> Spring Boot Application
@@ -31,7 +31,7 @@ Executing Integration Tests
       1. mvn verify -Pcheckout
       2. Open the following file to view the report -> ./target/site/serenity/index.html
  
- FAQ
+FAQ
  How do I change the port being used?
     Edit application.properties inside src/main/resources and update the value to your liking
  
