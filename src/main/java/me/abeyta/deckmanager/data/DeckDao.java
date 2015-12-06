@@ -6,4 +6,5 @@ public interface DeckDao {
 
 	public Deck createOrReplace(String deckName);
 	public Deck getDeckByName(String deckName);
+	public void delete(String deckName);
 }

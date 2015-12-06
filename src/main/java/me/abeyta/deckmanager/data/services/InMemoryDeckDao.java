@@ -3,12 +3,14 @@ package me.abeyta.deckmanager.data.services;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import me.abeyta.deckmanager.data.DeckDao;
 import me.abeyta.deckmanager.model.Deck;
 
 @Component
+@Primary
 public class InMemoryDeckDao implements DeckDao {
 
 	private Map<String, Deck> decks = new HashMap<>();
@@ -25,5 +27,9 @@ public class InMemoryDeckDao implements DeckDao {
 		return decks.get(deckName);
 	}
 
-	
+	@Override
+	public void delete(String deckName) {
+		decks.remove(deckName);
+	}
+
 }

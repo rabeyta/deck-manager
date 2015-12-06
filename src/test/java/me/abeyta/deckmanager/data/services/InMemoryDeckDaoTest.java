@@ -1,7 +1,6 @@
 package me.abeyta.deckmanager.data.services;
 
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,5 +37,18 @@ public class InMemoryDeckDaoTest {
 		
 		Deck newDeck1 = dao.createOrReplace(deckName);
 		assertNotSame(initialReturnedDeck, newDeck1);
+	}
+	
+	@Test
+	public void deleteDeckExistingRemoves() {
+		String deckName = "deck2";
+		
+		dao.createOrReplace(deckName);
+		
+		Deck deck = dao.getDeckByName(deckName);
+		assertNotNull(deck);
+		
+		dao.delete(deckName);
+		assertNull(dao.getDeckByName(deckName));
 	}
 }
