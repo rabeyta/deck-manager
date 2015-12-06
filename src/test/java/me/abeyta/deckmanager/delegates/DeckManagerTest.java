@@ -4,6 +4,10 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Set;
+
+import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,5 +58,16 @@ public class DeckManagerTest {
 		manager.delete(deckName);
 		
 		verify(dao).delete(deckName);
+	}
+	
+	@Test
+	public void getAllDeckNames() {
+		Set<String> names = Collections.singleton("name");
+		when(dao.getAllExistingDeckNames()).thenReturn(names);
+		
+		Set<String> output = manager.getAllDeckNames();
+		
+		assertSame(names, output);
+		verify(dao).getAllExistingDeckNames();
 	}
 }

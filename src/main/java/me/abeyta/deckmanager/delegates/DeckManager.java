@@ -1,5 +1,7 @@
 package me.abeyta.deckmanager.delegates;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,10 @@ public class DeckManager {
 
 	public void delete(String deckName) {
 		dao.delete(deckName);
+	}
+
+	public Set<String> getAllDeckNames() {
+		return dao.getAllExistingDeckNames();
 	}
 
 }
