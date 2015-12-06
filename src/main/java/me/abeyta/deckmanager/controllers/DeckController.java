@@ -44,4 +44,10 @@ public class DeckController {
 		//TODO: 404 when not found
 		manager.delete(deckName);
 	}
+	
+	@RequestMapping(value="/{deckName}", method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	public Deck shuffleDeck(@PathVariable(value="deckName") String deckName) {
+		//TODO: 404 when not found
+		return manager.shuffle(deckName);
+	}
 }

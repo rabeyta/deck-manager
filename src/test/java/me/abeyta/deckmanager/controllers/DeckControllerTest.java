@@ -60,4 +60,15 @@ public class DeckControllerTest {
 		verify(manager).getAllDeckNames();
 	}
 	
+	@Test
+	public void shuffle() {
+		Deck deck = new Deck();
+		when(manager.shuffle(deckName)).thenReturn(deck);
+		
+		Deck output = controller.shuffleDeck(deckName);
+		
+		assertSame(deck, output);
+		verify(manager).shuffle(deckName);
+	}
+	
 }

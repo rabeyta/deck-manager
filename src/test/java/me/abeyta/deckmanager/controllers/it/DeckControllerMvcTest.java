@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -54,7 +55,7 @@ public class DeckControllerMvcTest {
 	public void putToDecksCallsManagerToCreateWithGivenName() throws Exception {
 		when(mockManager.create(isA(Deck.class))).thenReturn(deck);
 		
-		mockMvc.perform(put("/decks/" + deckName,new Object[] {}))
+		mockMvc.perform(put(deckNameUrl(),new Object[] {}))
 											.andExpect(status().isCreated())
 											.andExpect(content().json(getDeckJson(), false));
 		
@@ -65,7 +66,7 @@ public class DeckControllerMvcTest {
 	public void getDeck() throws Exception {
 		when(mockManager.get(deckName)).thenReturn(deck);
 		
-		mockMvc.perform(get("/decks/" + deckName,new Object[] {}))
+		mockMvc.perform(get(deckNameUrl(),new Object[] {}))
 								.andExpect(status().isOk())
 								.andExpect(content().json(getDeckJson(), false));
 		
@@ -74,7 +75,7 @@ public class DeckControllerMvcTest {
 	
 	@Test
 	public void deleteDeck() throws Exception {
-		mockMvc.perform(delete("/decks/" + deckName,new Object[] {}))
+		mockMvc.perform(delete(deckNameUrl(),new Object[] {}))
 								.andExpect(status().isNoContent());
 				
 		verify(mockManager).delete(deckName);
@@ -92,9 +93,24 @@ public class DeckControllerMvcTest {
 		
 		verify(mockManager).getAllDeckNames();
 	}
+
+	@Test
+	public void shuffleDeck() throws Exception {
+		when(mockManager.shuffle(deckName)).thenReturn(deck);
+			
+		mockMvc.perform(post(deckNameUrl(),new Object[] {}))
+											.andExpect(status().isOk())
+											.andExpect(content().json(getDeckJson(), false));
+			
+		verify(mockManager).shuffle(deckName);
+	}
+	
 	
 	private String getDeckJson() {
 		return new Gson().toJson(deck);
 	}
-
+	
+	private String deckNameUrl() {
+		return "/decks/" + deckName;
+	}
 }
