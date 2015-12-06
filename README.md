@@ -20,7 +20,7 @@ Hand
 By default, simple is used. This is toggled by the `shuffle.technique` property set when starting the application. The two valid values are `hand` or `simple`. Not setting the value will default to simple.
 
 API GUI to play around with operations and visualize methods 
-(Provided by [Swagger](http://swagger.io/) / [Springfox](http://springfox.github.io/springfox/)
+(Provided by [Swagger](http://swagger.io/) / [Springfox](http://springfox.github.io/springfox/))
 
    1. Start the application
    2. Go to: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
