@@ -1,6 +1,11 @@
-This is a RESTful web service that enables one to manage a deck of cards. The service enables you to perform the following actions on a given deck: retrieve, create, delete, shuffle. There is also an operation to retrieve a list of all the decks the manager is managing.
+This is a RESTful web service that enables one to manage a deck of cards. The service enables you to perform the following actions on a given deck: retrieve, create, delete, and shuffle. There is also an operation to retrieve a list of all the decks the manager is managing.
 
 There are two options for shuffling techniques. By default, simple is used. This is toggled by the shuffle.technique property set when starting the application. The two valid values are 'hand' or 'simple'. Not setting the value will default to simple.
+
+API GUI to play around with operations and visualize methods 
+(Provided by Swagger (http://swagger.io/) / Springfox (http://springfox.github.io/springfox/)
+   1. Start the application
+   2. Go to: http://localhost:8080/swagger-ui.html
 
 Workstation Setup
    1. Install Eclipse or STS (Preferred - http://spring.io/tools/sts)
