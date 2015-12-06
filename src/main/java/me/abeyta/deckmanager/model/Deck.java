@@ -12,11 +12,11 @@ public class Deck {
 
 	private String name;
 	private Set<Card> cards;
-	
+
 	public Deck() {
 		this("default");
 	}
-	
+
 	public Deck(String deckName) {
 		this.name = deckName;
 		this.cards = new LinkedHashSet<>();
@@ -25,7 +25,7 @@ public class Deck {
 		populateSuite(Suite.CLUBS);
 		populateSuite(Suite.SPADES);
 	}
-	
+
 	private void populateSuite(Suite suite) {
 		cards.add(new Card(suite, "A"));
 		cards.add(new Card(suite, "2"));
@@ -62,12 +62,22 @@ public class Deck {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj, true);
+		if (obj == null) {
+			return false;
+		}
+		if (obj == this) {
+			return true;
+		}
+		if (obj.getClass() != getClass()) {
+			return false;
+		}
+		Deck rhs = (Deck) obj;
+		return new EqualsBuilder().appendSuper(super.equals(obj)).append(name, rhs.getName()).append(cards, rhs.getCards()).isEquals();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this, true);
