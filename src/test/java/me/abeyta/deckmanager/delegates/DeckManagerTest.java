@@ -1,8 +1,10 @@
 package me.abeyta.deckmanager.delegates;
 
 import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -20,11 +22,17 @@ public class DeckManagerTest {
 	@Mock
 	private DeckDao dao;
 	
+	private Deck deck;
+	private String deckName;
+	
+	@Before
+	public void setup() {
+		deckName = "myDeck";
+		deck = new Deck(deckName);
+	}
+	
 	@Test
 	public void createReturnsDeckFromDao() {
-		String deckName = "water";
-		Deck deck = new Deck(deckName);
-		
 		when(dao.createOrReplace(deckName)).thenReturn(deck);
 		
 		Deck output = manager.create(deckName);
@@ -32,4 +40,19 @@ public class DeckManagerTest {
 		assertSame(deck , output);
 	}
 	
+	@Test
+	public void getDeck() {
+		when(dao.getDeckByName(deckName)).thenReturn(deck);
+		Deck output = manager.get(deckName);
+		
+		assertSame(deck, output);
+		verify(dao).getDeckByName(deckName);
+	}
+	
+	@Test
+	public void deleteDeck() {
+		manager.delete(deckName);
+		
+		verify(dao).delete(deckName);
+	}
 }
