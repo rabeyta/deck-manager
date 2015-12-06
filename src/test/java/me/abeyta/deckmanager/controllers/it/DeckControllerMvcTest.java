@@ -1,6 +1,9 @@
 package me.abeyta.deckmanager.controllers.it;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,21 +35,49 @@ public class DeckControllerMvcTest {
 	@Autowired
 	private WebApplicationContext context;
 	
-	MockMvc mockMvc;
+	private MockMvc mockMvc;
+	private Deck deck;
+	private String deckName;
 	
 	@Before
 	public void setup() {
+		deckName = "myDeck";
+		deck = new Deck(deckName);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
 	@Test
 	public void putToDecksCallsManagerToCreateWithGivenName() throws Exception {
-		String deckName = "myDeck";
-		Deck deck = new Deck(deckName);
 		when(mockManager.create(deckName)).thenReturn(deck);
 		
 		mockMvc.perform(put("/decks/" + deckName,new Object[] {}))
 											.andExpect(status().isCreated())
-											.andExpect(content().json(new Gson().toJson(deck), false));
+											.andExpect(content().json(getDeckJson(), false));
+		
+		verify(mockManager).create(deckName);
 	}
+
+	@Test
+	public void getDeck() throws Exception {
+		when(mockManager.get(deckName)).thenReturn(deck);
+		
+		mockMvc.perform(get("/decks/" + deckName,new Object[] {}))
+								.andExpect(status().isOk())
+								.andExpect(content().json(getDeckJson(), false));
+		
+		verify(mockManager).get(deckName);
+	}
+	
+	@Test
+	public void deleteDeck() throws Exception {
+		mockMvc.perform(delete("/decks/" + deckName,new Object[] {}))
+								.andExpect(status().isNoContent());
+				
+		verify(mockManager).delete(deckName);
+	}
+	
+	private String getDeckJson() {
+		return new Gson().toJson(deck);
+	}
+
 }
