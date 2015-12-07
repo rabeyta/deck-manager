@@ -6,7 +6,10 @@ import static me.abeyta.deckmanager.delegates.shuffle.ShufflerUtils.convertDeckI
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import me.abeyta.deckmanager.model.Card;
 import me.abeyta.deckmanager.model.Deck;
@@ -50,8 +53,10 @@ public class HandShuffler implements Shuffler {
 	}
 
 	private Card[] shuffleCards(Card[] cards) {
-		Card[] leftSide = splitCards(cards, false);
-		Card[] rightSide = splitCards(cards, true);
+		Pair<Card[], Card[]> cardHalves = splitCards(cards); 
+		
+		Card[] leftSide = cardHalves.getLeft();
+		Card[] rightSide = cardHalves.getRight();
 
 		List<Card> shuffledList = new ArrayList<>();
 		for(int x = 0; x < leftSide.length; x ++) {
@@ -62,17 +67,13 @@ public class HandShuffler implements Shuffler {
 		return shuffledList.toArray(new Card[shuffledList.size()]);
 	}
 
-	private Card[] splitCards(Card[] cards, boolean topHalf) {
+	private Pair<Card[], Card[]> splitCards(Card[] cards) {
 		int halfCount = cards.length / 2;
-		Card[] cardHalf = new Card[halfCount];
-		int cardIndex = 0;
-		if (topHalf) {
-			cardIndex = halfCount;
-		}
-		for (int x = 0; x < halfCount; x++, cardIndex++) {
-			cardHalf[x] = cards[cardIndex];
-		}
-		return cardHalf;
+		
+		Card[] bottom = (Card[]) ArrayUtils.subarray(cards, 0, halfCount);
+		Card[] top = (Card[]) ArrayUtils.subarray(cards, halfCount, cards.length);
+
+		return new ImmutablePair<>(bottom, top);
 	}
 
 }
