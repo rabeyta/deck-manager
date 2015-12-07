@@ -43,8 +43,8 @@ public class HandShuffler implements Shuffler {
 	}
 
 	private Card[] shuffleCards(Card[] cards) {
-		Card[] leftSide = splitCards(cards, true);
-		Card[] rightSide = splitCards(cards, false);
+		Card[] leftSide = splitCards(cards, false);
+		Card[] rightSide = splitCards(cards, true);
 
 		List<Card> shuffledList = new ArrayList<>();
 		for(int x = 0; x < leftSide.length; x ++) {
