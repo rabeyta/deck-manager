@@ -28,7 +28,7 @@ API GUI to play around with operations and visualize methods
 Workstation Setup
 
    1. Install [Eclipse](http://www.eclipse.org/) or [STS](http://spring.io/tools/sts) (Preferred)
-   2. Ensure you have [Maven](http://maven.apache.org/) installed and setup on your PATH 
+   2. Ensure you have [Maven](http://maven.apache.org/) installed and setup on your PATH if you are building outside of STS 
    3. Import the project in STS. 
 	   3. File -> Import -> Existing Maven Project
    4. Build the application
@@ -50,7 +50,20 @@ Running the application
  - Outside STS
       1. Build the application
       2. Navigate to folder containing the jar
-      3. Execute the following command `java -jar deck-manager-1.0.0-SNAPSHOT.jar --shuffle.technique=hand`
+      3. Execute the following command `java -jar deck-manager-1.0.0-SNAPSHOT.jar`
+
+Changing Shuffling Technique Used
+
+ - Within STS
+      1. Right click on the deck-manager project -> Run As -> Run Configurations
+      2. Click on New Spring Boot Application
+      3. Select the project
+      4. Select the main type: me.abeyta.deckmanager.DeckManagerApplication
+      5. Under the program arguments tab - Add the following to VM Arguments to switch technique `-Dshuffle.technique=hand` 
+ - Outside STS
+      1. Build the application
+      2. Navigate to folder containing the jar
+      3. Execute the following command `java -jar deck-manager-1.0.0-SNAPSHOT.jar --shuffle.technique=hand`      
 
 Executing Integration Tests
 
