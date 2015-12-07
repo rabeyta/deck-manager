@@ -37,7 +37,7 @@ public class HandShuffler implements Shuffler {
 		
 		do {
 			numberOfShuffles = RandomUtils.nextInt(1, 100) + 1; //account for previous shuffle already done
-		} while(numberOfShuffles % 8 == 0 || numberOfShuffles % 52 == 0); //ensure we do not reset the deck with an 8 or 52
+		} while(numberOfShuffles % 8 == 0); //ensure we do not reset the deck to the starting point with an 8
 		
 		return numberOfShuffles;
 	}
