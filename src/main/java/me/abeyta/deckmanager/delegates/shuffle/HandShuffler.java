@@ -22,14 +22,21 @@ public class HandShuffler implements Shuffler {
 	public void shuffle(Deck deck) {
 		Card[] cards = convertDeckIntoCardArray(deck);
 
+		Deck baseDeck = new Deck(deck.getName());
+		do {
+			Card[] shuffledCards = shuffleDeck(cards);
+			deck.setCards(convertCardArrayIntoSet(shuffledCards));
+		} while(baseDeck.equals(deck));//ensure we never return a deck that is in original order
+	}
+
+	private Card[] shuffleDeck(Card[] cards) {
 		int numberOfShuffles = getRandomShuffleCountThatDoesntResetDeck();
 
 		Card[] shuffledCards = shuffleCards(cards);
 		for(int x = 0; x < numberOfShuffles; x++) {
 			shuffledCards = shuffleCards(shuffledCards);
 		}
-
-		deck.setCards(convertCardArrayIntoSet(shuffledCards));
+		return shuffledCards;
 	}
 
 	private int getRandomShuffleCountThatDoesntResetDeck() {
