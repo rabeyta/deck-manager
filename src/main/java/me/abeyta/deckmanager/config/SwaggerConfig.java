@@ -36,7 +36,8 @@ public class SwaggerConfig {
                 .title("Deck Manager API")
                 .description("This is a RESTful web service that enables one to manage a deck of cards. The service enables you to perform the following actions on a given deck: retrieve, create, delete, and shuffle. There is also an operation to retrieve a list of all the decks the manager is managing.\n" + 
                 		"\n" + 
-                		"There are two options for shuffling techniques. By default, simple is used. This is toggled by the shuffle.technique property set when starting the application. The two valid values are 'hand' or 'simple'. Not setting the value will default to simple.")
+                		"There are two options for shuffling techniques. By default, simple is used. This is toggled by the shuffle.technique property set when starting the application. The two valid values are 'hand' or 'simple'. Not setting the value will default to simple." + 
+                		"\n\n For a more thorough description and details check out: <a href='https://github.com/rabeyta/deck-manager/blob/master/README.md'>https://github.com/rabeyta/deck-manager/blob/master/README.md</a>")
                 .license("The MIT License (MIT)")
                 .licenseUrl("https://github.com/rabeyta/deck-manager/blob/master/LICENSE")
                 .contact("robert@abeyta.me")
