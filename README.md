@@ -15,7 +15,7 @@ Simple
 
 Hand
 
-> This is an algorithm that mimics a person shuffling a deck. It splits the deck in half, and then weaves the two together. It does this at least once, and then an additional random number of times before returning the deck as shuffled.
+> This is an algorithm that mimics a person shuffling a deck using [Faro Shuffle](https://en.wikipedia.org/wiki/Faro_shuffle). It splits the deck in half, and then weaves the two together. It does this at least twice, but will not return the deck in the original order.
 
 By default, simple is used. This is toggled by the `shuffle.technique` property set when starting the application. The two valid values are `hand` or `simple`. Not setting the value will default to simple.
 
