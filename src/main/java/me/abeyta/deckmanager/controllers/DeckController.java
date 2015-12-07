@@ -39,7 +39,7 @@ public class DeckController {
 		return manager.getAllDeckNames();
 	}
 	
-	@RequestMapping(value="/{deckName}", method=RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/{deckName}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteDeck(@PathVariable(value="deckName") String deckName) {
 		manager.delete(deckName);
