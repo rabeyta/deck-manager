@@ -36,7 +36,7 @@ public class HandShuffler implements Shuffler {
 		int numberOfShuffles = getRandomShuffleCountThatDoesntResetDeck();
 
 		Card[] shuffledCards = shuffleCards(cards);
-		for(int x = 0; x < numberOfShuffles; x++) {
+		for(int x = 1; x < numberOfShuffles; x++) {
 			shuffledCards = shuffleCards(shuffledCards);
 		}
 		return shuffledCards;
