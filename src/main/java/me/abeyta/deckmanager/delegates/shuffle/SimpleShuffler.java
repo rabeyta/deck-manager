@@ -26,7 +26,7 @@ public class SimpleShuffler implements Shuffler {
 
 	private void shuffleCards(Card[] cards) {
 		for(int x = cards.length - 1; x > 0; x--) {
-			int randomNumber = RandomUtils.nextInt(0, x);
+			int randomNumber = RandomUtils.nextInt(0, x + 1); //Increase by 1 to include x as a potential
 			Card holder = cards[x];
 			cards[x] = cards[randomNumber];
 			cards[randomNumber] = holder;
