@@ -29,14 +29,16 @@ public class HandShuffler implements Shuffler {
 		do {
 			Card[] shuffledCards = shuffleDeck(cards);
 			deck.setCards(convertCardArrayIntoSet(shuffledCards));
-		} while(baseDeck.equals(deck));//ensure we never return a deck that is in original order
+		} while(baseDeck.equals(deck)); //ensure we never return a deck that is in original, unshuffled order
+		//subsequent calls to this method could eventually cause the deck to end up in a starting state.
+		//Shuffle again when that happens to ensure a shuffled deck is always returned.
 	}
 
 	private Card[] shuffleDeck(Card[] cards) {
 		int numberOfShuffles = getRandomShuffleCountThatDoesntResetDeck();
 
 		Card[] shuffledCards = shuffleCards(cards);
-		for(int x = 1; x < numberOfShuffles; x++) {
+		for(int x = 1; x < numberOfShuffles; x++) {//start at 1 to account for full number of shuffles since we already did one.
 			shuffledCards = shuffleCards(shuffledCards);
 		}
 		return shuffledCards;
@@ -46,7 +48,7 @@ public class HandShuffler implements Shuffler {
 		int numberOfShuffles = 0;
 		
 		do {
-			numberOfShuffles = RandomUtils.nextInt(1, 100) + 1; //account for previous shuffle already done
+			numberOfShuffles = RandomUtils.nextInt(1, 100);
 		} while(numberOfShuffles % 8 == 0); //ensure we do not reset the deck to the starting point with an 8
 		
 		return numberOfShuffles;
