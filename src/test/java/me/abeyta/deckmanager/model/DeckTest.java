@@ -108,4 +108,9 @@ public class DeckTest {
 	public void defaultDecktoStringTesting() {
 		assertEquals("Deck[name=default,cards=[Card[suite=HEARTS,faceValue=A], Card[suite=HEARTS,faceValue=2], Card[suite=HEARTS,faceValue=3], Card[suite=HEARTS,faceValue=4], Card[suite=HEARTS,faceValue=5], Card[suite=HEARTS,faceValue=6], Card[suite=HEARTS,faceValue=7], Card[suite=HEARTS,faceValue=8], Card[suite=HEARTS,faceValue=9], Card[suite=HEARTS,faceValue=10], Card[suite=HEARTS,faceValue=J], Card[suite=HEARTS,faceValue=Q], Card[suite=HEARTS,faceValue=K], Card[suite=DIAMONDS,faceValue=A], Card[suite=DIAMONDS,faceValue=2], Card[suite=DIAMONDS,faceValue=3], Card[suite=DIAMONDS,faceValue=4], Card[suite=DIAMONDS,faceValue=5], Card[suite=DIAMONDS,faceValue=6], Card[suite=DIAMONDS,faceValue=7], Card[suite=DIAMONDS,faceValue=8], Card[suite=DIAMONDS,faceValue=9], Card[suite=DIAMONDS,faceValue=10], Card[suite=DIAMONDS,faceValue=J], Card[suite=DIAMONDS,faceValue=Q], Card[suite=DIAMONDS,faceValue=K], Card[suite=CLUBS,faceValue=A], Card[suite=CLUBS,faceValue=2], Card[suite=CLUBS,faceValue=3], Card[suite=CLUBS,faceValue=4], Card[suite=CLUBS,faceValue=5], Card[suite=CLUBS,faceValue=6], Card[suite=CLUBS,faceValue=7], Card[suite=CLUBS,faceValue=8], Card[suite=CLUBS,faceValue=9], Card[suite=CLUBS,faceValue=10], Card[suite=CLUBS,faceValue=J], Card[suite=CLUBS,faceValue=Q], Card[suite=CLUBS,faceValue=K], Card[suite=SPADES,faceValue=A], Card[suite=SPADES,faceValue=2], Card[suite=SPADES,faceValue=3], Card[suite=SPADES,faceValue=4], Card[suite=SPADES,faceValue=5], Card[suite=SPADES,faceValue=6], Card[suite=SPADES,faceValue=7], Card[suite=SPADES,faceValue=8], Card[suite=SPADES,faceValue=9], Card[suite=SPADES,faceValue=10], Card[suite=SPADES,faceValue=J], Card[suite=SPADES,faceValue=Q], Card[suite=SPADES,faceValue=K]]]", new Deck().toString());
 	}
+	
+	@Test 
+	public void hashCodeTesting() {
+		assertTrue(new Deck().hashCode() != 0);
+	}
 }
