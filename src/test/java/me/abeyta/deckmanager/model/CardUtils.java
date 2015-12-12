@@ -10,6 +10,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 public class CardUtils {
 
 	public static void assertAllCardsArePresent(Deck deck) {
@@ -18,24 +20,40 @@ public class CardUtils {
 		assertSuiteIsPresent(deck, CLUBS);
 		assertSuiteIsPresent(deck, SPADES);
 	}
-
+	
 	public static void assertSuiteIsPresent(Deck deck, Suite suite) {
 		Set<Card> cards = deck.getCards();
-		assertTrue(cards.contains(new Card(suite, "A")));
-		assertTrue(cards.contains(new Card(suite, "2")));
-		assertTrue(cards.contains(new Card(suite, "3")));
-		assertTrue(cards.contains(new Card(suite, "4")));
-		assertTrue(cards.contains(new Card(suite, "5")));
-		assertTrue(cards.contains(new Card(suite, "6")));
-		assertTrue(cards.contains(new Card(suite, "7")));
-		assertTrue(cards.contains(new Card(suite, "8")));
-		assertTrue(cards.contains(new Card(suite, "9")));
-		assertTrue(cards.contains(new Card(suite, "10")));
-		assertTrue(cards.contains(new Card(suite, "J")));
-		assertTrue(cards.contains(new Card(suite, "Q")));
-		assertTrue(cards.contains(new Card(suite, "K")));
+		for(Card card : createSuite(suite)) {
+			assertTrue(cards.contains(card));			
+		}
 	}
-
+	
+	public static Card[] createCardDeck() {
+		Card[] cards = ArrayUtils.addAll(null, createSuite(Suite.HEARTS));
+		cards = ArrayUtils.addAll(cards, createSuite(Suite.DIAMONDS));
+		cards = ArrayUtils.addAll(cards, createSuite(Suite.CLUBS));
+		cards = ArrayUtils.addAll(cards, createSuite(Suite.SPADES));
+		return cards;
+	}
+	
+	public static Card[] createSuite(Suite suite) {
+		Card[] cards = new Card[13];
+		cards[0] = new Card(suite, "A");
+		cards[1] = new Card(suite, "2");
+		cards[2] = new Card(suite, "3");
+		cards[3] = new Card(suite, "4");
+		cards[4] = new Card(suite, "5");
+		cards[5] = new Card(suite, "6");
+		cards[6] = new Card(suite, "7");
+		cards[7] = new Card(suite, "8");
+		cards[8] = new Card(suite, "9");
+		cards[9] = new Card(suite, "10");
+		cards[10] = new Card(suite, "J");
+		cards[11] = new Card(suite, "Q");
+		cards[12] = new Card(suite, "K");
+		return cards;
+	}
+	
 	public static boolean isDeckInDefaultOrder(Deck deck) {
 		Set<Card> defaultOrderedCards = createDefaultOrderedCardList();
 		int defaultCardSize = defaultOrderedCards.size();
