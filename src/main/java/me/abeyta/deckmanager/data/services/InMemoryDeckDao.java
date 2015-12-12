@@ -19,11 +19,7 @@ public class InMemoryDeckDao implements DeckDao {
 	
 	@Override
 	public Deck createOrReplace(Deck deck) {
-		String deckName = deck.getName();
-		
-		delete(deckName);
-		
-		decks.put(deckName, deck);
+		decks.put(deck.getName(), deck);
 		return deck;
 	}
 
