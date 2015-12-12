@@ -3,7 +3,11 @@ package me.abeyta.deckmanager.model;
 import static me.abeyta.deckmanager.model.CardUtils.assertAllCardsArePresent;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -18,6 +22,17 @@ public class DeckTest {
 		assertEquals("default", deck.getName());
 		assertTrue(deck.getCards().size() == 52);
 		assertAllCardsArePresent(deck);
+	}
+	
+	@Test
+	public void nameAndCardConstructor() {
+		String name = "rob";
+		Set<Card> cards = new HashSet<>();
+		
+		Deck deck = new Deck(name, cards);
+		
+		assertEquals(name, deck.getName());
+		assertSame(cards, deck.getCards());
 	}
 	
 	@Test
