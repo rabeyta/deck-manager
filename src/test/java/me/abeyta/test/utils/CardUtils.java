@@ -1,4 +1,4 @@
-package me.abeyta.deckmanager.model;
+package me.abeyta.test.utils;
 
 import static me.abeyta.deckmanager.model.Suite.CLUBS;
 import static me.abeyta.deckmanager.model.Suite.DIAMONDS;
@@ -11,6 +11,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
+
+import me.abeyta.deckmanager.model.Card;
+import me.abeyta.deckmanager.model.Deck;
+import me.abeyta.deckmanager.model.Suite;
 
 public class CardUtils {
 

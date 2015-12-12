@@ -1,7 +1,7 @@
 package me.abeyta.deckmanager.delegates.shuffle;
 
-import static me.abeyta.deckmanager.model.CardUtils.isDeckInDefaultOrder;
-import static me.abeyta.deckmanager.model.CardUtils.isDeckSizeCorrect;
+import static me.abeyta.test.utils.CardUtils.isDeckInDefaultOrder;
+import static me.abeyta.test.utils.CardUtils.isDeckSizeCorrect;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

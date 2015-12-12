@@ -1,9 +1,9 @@
 package me.abeyta.deckmanager.delegates.shuffle;
 
-import static me.abeyta.deckmanager.model.CardUtils.assertAllCardsArePresent;
-import static me.abeyta.deckmanager.model.CardUtils.createCardDeck;
-import static me.abeyta.deckmanager.model.CardUtils.isDeckInDefaultOrder;
-import static me.abeyta.deckmanager.model.CardUtils.isDeckSizeCorrect;
+import static me.abeyta.test.utils.CardUtils.assertAllCardsArePresent;
+import static me.abeyta.test.utils.CardUtils.createCardDeck;
+import static me.abeyta.test.utils.CardUtils.isDeckInDefaultOrder;
+import static me.abeyta.test.utils.CardUtils.isDeckSizeCorrect;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 

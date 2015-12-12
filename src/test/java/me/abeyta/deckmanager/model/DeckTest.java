@@ -1,6 +1,6 @@
 package me.abeyta.deckmanager.model;
 
-import static me.abeyta.deckmanager.model.CardUtils.assertAllCardsArePresent;
+import static me.abeyta.test.utils.CardUtils.assertAllCardsArePresent;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
