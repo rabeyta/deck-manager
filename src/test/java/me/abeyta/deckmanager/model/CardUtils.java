@@ -4,6 +4,7 @@ import static me.abeyta.deckmanager.model.Suite.CLUBS;
 import static me.abeyta.deckmanager.model.Suite.DIAMONDS;
 import static me.abeyta.deckmanager.model.Suite.HEARTS;
 import static me.abeyta.deckmanager.model.Suite.SPADES;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedHashSet;
@@ -49,6 +50,12 @@ public class CardUtils {
 	
 	public static boolean isDeckSizeCorrect(Deck deck) {
 		return deck.getCards().size() == 52;
+	}
+	
+	public static void validateDeck(Deck deck) {
+		assertTrue("Deck was not right size", isDeckSizeCorrect(deck));
+		assertFalse("Deck was not shuffled", isDeckInDefaultOrder(deck));
+		assertAllCardsArePresent(deck);
 	}
 
 	public static Set<Card> createDefaultOrderedCardList() {
