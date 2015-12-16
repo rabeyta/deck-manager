@@ -17,7 +17,8 @@ import me.abeyta.deckmanager.model.Deck;
 public class HandShuffler implements Shuffler {
 
 	/**
-	 * Hand shuffling technique that weaves a half of a deck over each other
+	 * Hand shuffling technique that splits a deck of cards into two halves
+	 * and weaves the halves over each other
 	 * 
 	 * https://en.wikipedia.org/wiki/Faro_shuffle
 	 */
