@@ -28,7 +28,7 @@ public class HandShufflerTest {
 	}
 
 	@Test
-	public void shuffleALotToEnsureDeckIsNeverRest() {
+	public void shuffleALotToEnsureDeckIsNeverResetToOriginal() {
 		for (int x = 0; x < 10000; x++) {
 			shuffler.shuffle(deck);
 			validateDeck(deck);
