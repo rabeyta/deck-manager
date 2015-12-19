@@ -16,11 +16,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.client.HttpClientErrorException;
 
-import me.abeyta.deckmanager.model.CardUtils;
 import me.abeyta.deckmanager.model.Deck;
 import me.abeyta.it.ITTestConfig;
 import me.abeyta.it.IntegrationTestState;
 import me.abeyta.it.steps.DeckSteps;
+import me.abeyta.test.utils.CardUtils;
 
 @ContextConfiguration(classes=ITTestConfig.class)
 public class DeckDefinitions {

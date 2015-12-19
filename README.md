@@ -74,6 +74,18 @@ Executing Integration Tests
       1. mvn verify -Pcheckout
       2. Open the following file to view the report -> ./target/site/serenity/index.html
  
+Viewing PIT Report
+
+ 1. excute a build - `mvn clean install`
+ 2. navigate to ./target/pit-reports/{timestamp}/
+ 3. open index.html
+
+Viewing Jacoco Coverage Report
+
+ 1. excute a build - `mvn clean install`  
+ 2. navigate to ./target/site/jacoco/
+ 3. open index.html
+
 FAQ
 
  - How do I change the port being used?

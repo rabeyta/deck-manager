@@ -25,7 +25,12 @@ public class Deck {
 		populateSuite(Suite.CLUBS);
 		populateSuite(Suite.SPADES);
 	}
-
+	
+	public Deck(String deckName, Set<Card> cards) {
+		this.name = deckName;
+		this.cards = cards;
+	}
+	
 	private void populateSuite(Suite suite) {
 		cards.add(new Card(suite, "A"));
 		cards.add(new Card(suite, "2"));
